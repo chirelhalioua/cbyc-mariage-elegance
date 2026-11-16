@@ -79,6 +79,8 @@ function submitRsvp() {
     </section>
 
     <section class="intro section-pad">
+      <div class="feature-legend"><span><i class="feature-dot included"></i> Inclus dans la formule</span><span><i class="feature-dot optional"></i> Option en supplément</span></div>
+      <span class="feature-badge included">Inclus dans la formule</span>
       <p class="script">Une belle histoire, un nouveau chapitre</p>
       <h2>Et si nous célébrions<br><em>l'amour ensemble ?</em></h2>
       <p class="intro-text">Après tant de jolis souvenirs, nous avons hâte de commencer cette nouvelle aventure entourés des personnes qui comptent le plus pour nous. Votre présence rendra cette journée encore plus belle.</p>
@@ -97,6 +99,7 @@ function submitRsvp() {
     </section>
 
     <section class="countdown-section">
+      <span class="feature-badge optional">Option</span>
       <p class="script">Le grand jour approche</p>
       <h2>Plus que quelques <em>instants…</em></h2>
       <div class="countdown">
@@ -108,6 +111,7 @@ function submitRsvp() {
 
     <section id="journee" class="day-section section-pad">
       <div class="section-heading">
+        <span class="feature-badge optional">Option</span>
         <p class="eyebrow">À VOS AGENDAS</p>
         <p class="script">Le samedi 12 juin 2027</p>
         <h2>Le programme de<br><em>notre journée</em></h2>
@@ -138,13 +142,14 @@ function submitRsvp() {
       <p class="script">Quelques petits détails</p>
       <h2>Tout ce qu'il faut <em>savoir</em></h2>
       <div class="info-grid">
-        <article><div class="info-icon">⌖</div><h3>Le lieu</h3><p>Jardin des Étoiles<br>12 rue des Lilas, Paris</p><a href="https://maps.google.com/?q=Paris" target="_blank" rel="noreferrer">Voir l'itinéraire ↗</a></article>
-        <article><div class="info-icon">♡</div><h3>Tenue de fête</h3><p>Une tenue élégante et festive, dans laquelle vous vous sentez beaux et bien.</p><span>CHIC & ROMANTIQUE</span></article>
-        <article><div class="info-icon">✉</div><h3>Votre réponse</h3><p>Merci de nous confirmer votre présence avant le 15 mai 2027.</p><a href="#rsvp">Répondre ici ↓</a></article>
+        <article><span class="feature-badge included">Inclus</span><div class="info-icon">⌖</div><h3>Le lieu</h3><p>Jardin des Étoiles<br>12 rue des Lilas, Paris</p><a href="https://maps.google.com/?q=Paris" target="_blank" rel="noreferrer">Voir l'itinéraire ↗</a></article>
+        <article><span class="feature-badge optional">Option</span><div class="info-icon">♡</div><h3>Tenue de fête</h3><p>Une tenue élégante et festive, dans laquelle vous vous sentez beaux et bien.</p><span>CHIC & ROMANTIQUE</span></article>
+        <article><span class="feature-badge optional">Option</span><div class="info-icon">✉</div><h3>Votre réponse</h3><p>Merci de nous confirmer votre présence avant le 15 mai 2027.</p><a href="#rsvp">Répondre ici ↓</a></article>
       </div>
     </section>
 
     <section id="rsvp" class="rsvp-section">
+      <span class="feature-badge optional">Option</span>
       <div class="rsvp-flower">✿</div>
       <p class="eyebrow">ON COMPTE SUR VOUS !</p>
       <p class="script">Un petit mot de votre part</p>
