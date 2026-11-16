@@ -1,15 +1,15 @@
-# C by C — Modèle mariage 01 : Élégance intemporelle
+# Invitation de mariage — Sarah & David
 
-Projet indépendant développé avec Nuxt 3.
+Site vitrine de démonstration, indépendant de l'identité visuelle principale de C by C.
 
-## Lancer en local
-`npm install` puis `npm run dev`. Ouvrir http://localhost:3000.
+## Direction artistique
+Romantique et délicate : rose poudré, rose ancien, ivoire, typographies Cormorant Garamond et Great Vibes, portraits et photos en cadres circulaires, détails floraux et mise en page éditoriale.
 
-## Personnaliser
-Modifier les prénoms, date, horaires, lieu et textes dans `pages/index.vue`. Les photos sont des illustrations chargées depuis Unsplash.
+## Développement
+Nuxt 3 / Vue 3. Lancer avec `npm install` puis `npm run dev`.
 
-## Important
-Le formulaire RSVP est une démonstration front-end : il affiche une confirmation mais n'enregistre ni n'envoie les réponses. Connecter une API/base de données avant une utilisation réelle. L'adresse et le lieu sont fictifs.
+## Personnalisation
+Les prénoms, la date, les textes, les horaires et les photos sont définis dans `pages/index.vue`. Les styles sont dans `assets/css/main.css`.
 
-## Déploiement
-Importer ce dépôt GitHub dans Vercel. Projet indépendant du site principal C by C.
+## RSVP
+Le formulaire est uniquement une démonstration côté navigateur : il n'enregistre ni n'envoie les réponses. Il faudra le connecter à un service ou une API avant utilisation réelle. Le lieu et les informations sont fictifs.
