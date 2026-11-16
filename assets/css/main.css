@@ -59,3 +59,12 @@ footer>p:not(.script){color:#70575c}
  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
  .will-reveal{opacity:1;transform:none}
 }
+
+
+/* Ajustements demandés sur le hero mobile */
+.hero:before{display:none}
+.photo-caption{display:none}
+@media(max-width:760px){
+  .hero-copy{margin-top:34px;transform:translateY(18px)}
+  .hero{padding-bottom:105px}
+}
