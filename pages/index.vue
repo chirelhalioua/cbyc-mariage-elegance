@@ -4,8 +4,27 @@ import { computed, onMounted, onUnmounted, ref } from 'vue'
 const weddingDate = new Date('2027-06-12T15:00:00')
 const now = ref(new Date())
 let timer: ReturnType<typeof setInterval>
-onMounted(() => { timer = setInterval(() => now.value = new Date(), 1000) })
-onUnmounted(() => clearInterval(timer))
+let revealObserver: IntersectionObserver | undefined
+onMounted(() => {
+  timer = setInterval(() => now.value = new Date(), 1000)
+  if ('IntersectionObserver' in window) {
+    const targets = document.querySelectorAll('.intro, .story-copy, .story .image-circle, .section-heading, .event, .quote-photo, .quote-copy, .info-grid article, .rsvp-section > *')
+    targets.forEach((el) => el.classList.add('will-reveal'))
+    revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible')
+          revealObserver?.unobserve(entry.target)
+        }
+      })
+    }, { threshold: 0.14, rootMargin: '0px 0px -35px 0px' })
+    targets.forEach((el) => revealObserver?.observe(el))
+  }
+})
+onUnmounted(() => {
+  clearInterval(timer)
+  revealObserver?.disconnect()
+})
 const countdown = computed(() => {
   const ms = Math.max(0, weddingDate.getTime() - now.value.getTime())
   return [
