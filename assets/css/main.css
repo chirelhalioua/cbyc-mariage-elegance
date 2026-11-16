@@ -25,3 +25,37 @@ footer>p:not(.script){color:#70575c}
  .story .image-circle{width:min(78vw,370px);aspect-ratio:4/5}
  .event-photo{width:min(86vw,390px);aspect-ratio:4/3}
 }
+
+
+/* Animations délicates : apparition au scroll et mouvements légers */
+@keyframes heroTextIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes heroPhotoIn{from{opacity:0;transform:scale(.92) translateY(18px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes softFloat{0%,100%{transform:translateY(0) rotate(-9deg)}50%{transform:translateY(-9px) rotate(-7deg)}}
+@keyframes flowerDrift{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-12px) rotate(12deg)}}
+@keyframes ornamentIn{from{opacity:0;transform:scaleX(.4)}to{opacity:1;transform:scaleX(1)}}
+.hero-copy>*{animation:heroTextIn .85s cubic-bezier(.2,.7,.2,1) both}
+.hero-copy>*:nth-child(1){animation-delay:.12s}
+.hero-copy>*:nth-child(2){animation-delay:.24s}
+.hero-copy>*:nth-child(3){animation-delay:.36s}
+.hero-copy>*:nth-child(4){animation:ornamentIn .9s .52s both}
+.hero-copy>*:nth-child(5){animation-delay:.62s}
+.hero-copy>*:nth-child(6){animation-delay:.76s}
+.hero-photo-wrap{animation:heroPhotoIn 1.2s .2s cubic-bezier(.2,.7,.2,1) both}
+.photo-halo{animation:softFloat 7s ease-in-out 1.5s infinite}
+.flower-one{animation:flowerDrift 6s ease-in-out infinite}
+.flower-two{animation:flowerDrift 7s ease-in-out 1s infinite}
+.will-reveal{opacity:0;transform:translateY(28px);transition:opacity .85s ease,transform .85s cubic-bezier(.2,.7,.2,1)}
+.will-reveal.is-visible{opacity:1;transform:translateY(0)}
+.event:nth-child(2){transition-delay:.12s}
+.event:nth-child(3){transition-delay:.22s}
+.info-grid article:nth-child(2){transition-delay:.12s}
+.info-grid article:nth-child(3){transition-delay:.24s}
+.round-link,.nav-rsvp,.info-grid a,.rsvp-section button{transition:background-color .3s ease,color .3s ease,transform .3s ease,border-color .3s ease}
+.round-link:hover{box-shadow:0 8px 24px #a8798122}
+.info-grid article:hover .info-icon{transform:translateY(-5px) rotate(-8deg);transition:transform .35s ease}
+.info-icon{transition:transform .35s ease}
+.rsvp-section button:hover{transform:translateY(-3px);box-shadow:0 8px 20px #875c6526}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+ .will-reveal{opacity:1;transform:none}
+}
