@@ -68,3 +68,9 @@ footer>p:not(.script){color:#70575c}
   .hero-copy{margin-top:34px;transform:translateY(18px)}
   .hero{padding-bottom:105px}
 }
+
+
+/* Remonter légèrement la ligne d'accroche sur mobile */
+@media(max-width:760px){
+  .hero-copy .eyebrow{transform:translateY(-12px)}
+}
