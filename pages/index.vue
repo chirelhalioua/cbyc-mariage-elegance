@@ -177,6 +177,6 @@ function submitRsvp() {
       <small class="form-note">Démonstration : les réponses ne sont pas encore enregistrées ni envoyées.</small>
     </section>
 
-    <footer><div class="footer-monogram">S <span>&</span> D</div><p class="script">Nous avons hâte de vous retrouver</p><p>12 JUIN 2027 · PARIS</p><small>AVEC AMOUR · INVITATION IMAGINÉE PAR C BY C</small></footer>
+    <footer><div class="footer-monogram">S <span>&</span> D</div><p class="script">Nous avons hâte de vous retrouver</p><p>12 JUIN 2027 · PARIS</p><small>AVEC AMOUR · INVITATION IMAGINÉE PAR <a class="footer-credit-link" href="https://www.cbyc-invitations.fr/" target="_blank" rel="noopener noreferrer">C BY C</a></small></footer>
   </main>
 </template>
