@@ -38,6 +38,7 @@ const guestName = ref('')
 const guestEmail = ref('')
 const attendance = ref('oui')
 const guestCount = ref('2')
+const guestCountOpen = ref(false)
 const message = ref('')
 const submitted = ref(false)
 function submitRsvp() {
@@ -153,7 +154,17 @@ function submitRsvp() {
         <label>Votre nom et prénom<input v-model="guestName" required placeholder="Comment vous appelez-vous ?"></label>
         <label>Votre adresse e-mail<input v-model="guestEmail" type="email" required placeholder="vous@exemple.fr"></label>
         <fieldset><legend>Votre réponse</legend><label class="choice"><input v-model="attendance" type="radio" value="oui"> Avec joie, je serai là !</label><label class="choice"><input v-model="attendance" type="radio" value="non"> Je ne pourrai malheureusement pas venir</label></fieldset>
-        <label>Nombre de personnes<select v-model="guestCount"><option>1</option><option>2</option><option>3</option><option>4</option></select></label>
+        <div class="guest-picker">
+          <span class="field-label">Nombre de personnes</span>
+          <button class="guest-trigger" type="button" :aria-expanded="guestCountOpen" aria-haspopup="listbox" @click="guestCountOpen = !guestCountOpen">
+            <span>{{ guestCount }} {{ guestCount === '1' ? 'personne' : 'personnes' }}</span><span class="guest-chevron">⌄</span>
+          </button>
+          <div v-if="guestCountOpen" class="guest-options" role="listbox" aria-label="Nombre de personnes">
+            <button v-for="n in 4" :key="n" type="button" role="option" :aria-selected="guestCount === String(n)" :class="{ selected: guestCount === String(n) }" @click="guestCount = String(n); guestCountOpen = false">
+              <span>{{ n }} {{ n === 1 ? 'personne' : 'personnes' }}</span><span class="guest-check">{{ guestCount === String(n) ? '✓' : '' }}</span>
+            </button>
+          </div>
+        </div>
         <label>Un petit mot pour nous<textarea v-model="message" rows="3" placeholder="Un mot doux, une pensée…"></textarea></label>
         <button type="submit">Envoyer ma réponse <span>♡</span></button>
       </form>
