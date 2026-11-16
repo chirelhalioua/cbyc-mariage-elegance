@@ -263,3 +263,20 @@ footer>p:not(.script){color:#70575c}
  .guest-picker{grid-column:1}
  .rsvp-section .guest-trigger{min-height:48px}
 }
+
+
+/* Repères visuels pour distinguer les éléments inclus des options */
+.feature-legend{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin:0 auto 28px;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:#755a60}
+.feature-legend span{display:inline-flex;align-items:center;gap:8px}
+.feature-dot{width:7px;height:7px;border-radius:50%;display:inline-block}
+.feature-dot.included{background:#8d9b83}
+.feature-dot.optional{background:#bd8992}
+.feature-badge{display:inline-flex;align-items:center;justify-content:center;padding:7px 11px;border:1px solid;border-radius:30px;font-size:7px;line-height:1;letter-spacing:1.2px;text-transform:uppercase;font-family:Montserrat,sans-serif;font-weight:500}
+.feature-badge.included{color:#65765e;border-color:#b9c5b1;background:#f5f8f1}
+.feature-badge.optional{color:#875c65;border-color:#d9b5ba;background:#fff8f6}
+.intro>.feature-badge{margin-top:0}
+.countdown-section>.feature-badge{margin-bottom:18px}
+.section-heading>.feature-badge{margin-bottom:14px}
+.info-grid article>.feature-badge{margin-bottom:14px}
+.rsvp-section>.feature-badge{margin-bottom:20px}
+@media(max-width:760px){.feature-legend{gap:10px 16px;font-size:7px;margin-bottom:22px}.feature-badge{font-size:7px}}
