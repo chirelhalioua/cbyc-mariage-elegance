@@ -171,3 +171,95 @@ footer>p:not(.script){color:#70575c}
 .guest-options button:hover,.guest-options button.selected{background:#f3e2e3;color:#754d56}
 .guest-check{color:#875c65;font-size:15px}
 @media(max-width:760px){.guest-picker{grid-column:1}}
+
+
+/* RSVP — dropdown discret, assorti au formulaire (sans style de bouton principal) */
+.guest-picker{width:100%;min-width:0;gap:10px}
+.guest-picker .field-label{
+  display:block;
+  margin:0;
+  padding:0;
+  border:0;
+  font-family:Montserrat,sans-serif;
+  font-size:10px;
+  line-height:1.5;
+  letter-spacing:1px;
+  color:#65454b;
+}
+.rsvp-section .guest-trigger{
+  width:100%;
+  min-height:48px;
+  height:auto;
+  margin:0;
+  padding:12px 15px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border:1px solid #d7afb5;
+  border-radius:3px;
+  background:#fffaf8;
+  color:#65454b;
+  box-shadow:none;
+  text-align:left;
+  font-family:Montserrat,sans-serif;
+  font-size:11px;
+  font-weight:400;
+  letter-spacing:.5px;
+  text-transform:none;
+}
+.rsvp-section .guest-trigger:hover,
+.rsvp-section .guest-trigger:focus-visible{
+  background:#fff;
+  border-color:#a96f7a;
+  box-shadow:0 0 0 2px #d9aeb422;
+  transform:none;
+}
+.rsvp-section .guest-chevron{font-size:17px;color:#875c65}
+.guest-options{
+  top:calc(100% + 5px);
+  left:0;
+  right:0;
+  width:100%;
+  padding:4px;
+  background:#fffaf8;
+  border:1px solid #dfc4c6;
+  border-radius:3px;
+  box-shadow:0 8px 20px #684f5418;
+}
+.rsvp-section .guest-options button{
+  width:100%;
+  min-height:42px;
+  height:auto;
+  margin:0;
+  padding:10px 12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border:0;
+  border-bottom:1px solid #f0e5e3;
+  border-radius:0;
+  background:transparent;
+  color:#594348;
+  box-shadow:none;
+  text-align:left;
+  font-family:Montserrat,sans-serif;
+  font-size:11px;
+  font-weight:400;
+  letter-spacing:.3px;
+  text-transform:none;
+  cursor:pointer;
+  transform:none;
+}
+.rsvp-section .guest-options button:last-child{border-bottom:0}
+.rsvp-section .guest-options button:hover,
+.rsvp-section .guest-options button.selected{
+  background:#f5e8e7;
+  color:#68464e;
+  box-shadow:none;
+  transform:none;
+}
+.guest-check{color:#875c65;font-size:14px;font-weight:500}
+@media(max-width:760px){
+ .guest-picker{grid-column:1}
+ .rsvp-section .guest-trigger{min-height:48px}
+}
