@@ -1,28 +1,147 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
+
 const weddingDate = new Date('2027-06-12T15:00:00')
 const now = ref(new Date())
-let interval: ReturnType<typeof setInterval>
-onMounted(() => { interval = setInterval(() => now.value = new Date(), 1000) })
-onUnmounted(() => clearInterval(interval))
+let timer: ReturnType<typeof setInterval>
+onMounted(() => { timer = setInterval(() => now.value = new Date(), 1000) })
+onUnmounted(() => clearInterval(timer))
 const countdown = computed(() => {
- const ms = Math.max(0, weddingDate.getTime() - now.value.getTime())
- return [Math.floor(ms/86400000),Math.floor(ms%86400000/3600000),Math.floor(ms%3600000/60000),Math.floor(ms%60000/1000)]
+  const ms = Math.max(0, weddingDate.getTime() - now.value.getTime())
+  return [
+    Math.floor(ms / 86400000),
+    Math.floor(ms % 86400000 / 3600000),
+    Math.floor(ms % 3600000 / 60000),
+    Math.floor(ms % 60000 / 1000)
+  ]
 })
-const name=ref(''), email=ref(''), attendance=ref('oui'), guests=ref('2'), dietary=ref(''), sent=ref(false)
+const guestName = ref('')
+const guestEmail = ref('')
+const attendance = ref('oui')
+const guestCount = ref('2')
+const message = ref('')
+const submitted = ref(false)
+function submitRsvp() {
+  if (!guestName.value.trim() || !guestEmail.value.trim()) return
+  submitted.value = true
+}
 </script>
+
 <template>
-<main>
-<header><a class="brand" href="#accueil">S <i>&</i> D</a><nav><a href="#histoire">Notre histoire</a><a href="#programme">Le programme</a><a href="#infos">Informations</a><a class="navbtn" href="#rsvp">Répondre</a></nav><a class="mobile" href="#rsvp">RSVP</a></header>
-<section id="accueil" class="hero"><div class="veil"></div><div class="heroText"><small>AVEC LA JOIE DE NOS FAMILLES</small><h1>Sarah <i>&</i> David</h1><div class="rule"></div><p>12 JUIN 2027 <b>·</b> PARIS</p><a class="outline" href="#histoire">DÉCOUVRIR NOTRE HISTOIRE</a></div><span class="bottom">UN JOUR UNIQUE, DES SOUVENIRS POUR TOUJOURS</span></section>
-<section class="intro"><small>LE DÉBUT D'UNE BELLE HISTOIRE</small><h2>Un bonheur à partager,<br><em>une journée à célébrer.</em></h2><p>Nous avons le bonheur de vous inviter à célébrer notre mariage. Votre présence à nos côtés rendra cette journée encore plus précieuse.</p><span class="flower">✳</span></section>
-<section class="count"><small>LE GRAND JOUR APPROCHE</small><h2>Plus que quelques instants…</h2><div class="timer"><div v-for="(v,i) in countdown" :key="i"><strong>{{ i ? String(v).padStart(2,'0') : v }}</strong><span>{{ ['JOURS','HEURES','MINUTES','SECONDES'][i] }}</span></div></div></section>
-<section id="histoire" class="story"><div class="storypic"></div><div class="storycopy"><small>NOTRE HISTOIRE</small><h2>Deux chemins,<br><em>une évidence.</em></h2><p>Il y a des rencontres qui changent le cours d'une vie. La nôtre a commencé par un sourire, s'est construite au fil des moments partagés et nous mène aujourd'hui vers le plus beau des engagements.</p><p>Nous avons hâte d'écrire ce nouveau chapitre entourés de ceux qui nous sont chers.</p><strong>Sarah & David</strong></div></section>
-<section id="programme" class="schedule"><small>12 JUIN 2027</small><h2>Le programme <em>de la journée</em></h2><p class="sub">Quelques rendez-vous pour vivre ensemble cette belle journée.</p><div class="events"><article><time>15H00</time><div><h3>La cérémonie</h3><p>Un moment rempli d'émotion pour célébrer notre union.</p></div></article><article><time>17H00</time><div><h3>Le vin d'honneur</h3><p>Retrouvons-nous autour d'un verre et de quelques douceurs.</p></div></article><article><time>19H30</time><div><h3>Le dîner & la soirée</h3><p>Un dîner festif, des rires et de beaux souvenirs à créer.</p></div></article></div></section>
-<section id="infos" class="venue"><div class="venuepic"></div><div class="venuecopy"><small>NOUS VOUS ATTENDONS</small><h2>Le lieu <em>des festivités</em></h2><h3>Le Domaine des Jardins</h3><p>12, avenue des Roses<br>75000 Paris</p><p>Un lieu imaginé pour se retrouver, célébrer et profiter de chaque instant.</p><a class="outline" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=Paris">VOIR L'ITINÉRAIRE</a></div></section>
-<section class="details"><small>POUR PROFITER SEREINEMENT</small><h2>Quelques <em>informations</em></h2><div class="detailgrid"><div><b>✧</b><h3>Tenue de soirée</h3><p>Une tenue élégante dans laquelle vous vous sentirez bien.</p></div><div><b>♡</b><h3>Une attention</h3><p>Votre présence est le plus beau des cadeaux. Merci d'être à nos côtés.</p></div><div><b>⌖</b><h3>Accès & parking</h3><p>Des places de stationnement sont disponibles à proximité du domaine.</p></div></div></section>
-<section class="gallery"><small>QUELQUES INSTANTS À DEUX</small><h2>En attendant <em>le grand jour</em></h2><div class="photos"><div></div><div></div><div></div></div></section>
-<section id="rsvp" class="rsvp"><div class="formcard"><small>VOTRE PRÉSENCE COMPTE POUR NOUS</small><h2>Serez-vous <em>à nos côtés ?</em></h2><p class="sub">Merci de nous confirmer votre présence avant le 15 mai 2027.</p><form v-if="!sent" @submit.prevent="sent=true"><label>Votre nom et prénom<input v-model="name" required placeholder="Ex. Camille Martin"></label><label>Votre adresse e-mail<input v-model="email" type="email" required placeholder="vous@exemple.fr"></label><fieldset><legend>Pourrez-vous être présent(e) ?</legend><label class="radio"><input v-model="attendance" type="radio" value="oui"> Avec grand plaisir</label><label class="radio"><input v-model="attendance" type="radio" value="non"> Malheureusement non</label></fieldset><label v-if="attendance==='oui'">Nombre de personnes<select v-model="guests"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></label><label v-if="attendance==='oui'">Précisions alimentaires (facultatif)<textarea v-model="dietary" rows="3" placeholder="Allergies, régime alimentaire…"></textarea></label><button>ENVOYER MA RÉPONSE</button></form><div v-else class="thanks"><b>♡</b><h3>Merci pour votre réponse !</h3><p>Votre réponse a bien été prise en compte dans cette démonstration.</p></div><p class="fineprint">Démonstration C by C · Les réponses ne sont pas encore envoyées à une boîte e-mail.</p></div></section>
-<footer><small>AVEC TOUT NOTRE AMOUR</small><h2>Sarah <i>&</i> David</h2><p>12 JUIN 2027 · PARIS</p><hr><span>Un modèle de démonstration imaginé par <b>C by C</b></span></footer>
-</main>
+  <main>
+    <header class="topbar">
+      <a class="monogram" href="#home">S<span>&</span>D</a>
+      <nav>
+        <a href="#histoire">Notre histoire</a>
+        <a href="#journee">La journée</a>
+        <a href="#infos">Les informations</a>
+      </nav>
+      <a class="nav-rsvp" href="#rsvp">Répondre à l'invitation <span>↗</span></a>
+    </header>
+
+    <section id="home" class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">LE BONHEUR DE VOUS AVOIR À NOS CÔTÉS</p>
+        <p class="script pretitle">Nous nous marions…</p>
+        <h1>Sarah <em>&</em><br>David</h1>
+        <div class="ornament"><span></span> ✿ <span></span></div>
+        <p class="hero-date">SAMEDI 12 JUIN 2027 <i>·</i> PARIS</p>
+        <a href="#histoire" class="round-link">Découvrir<br>notre journée <b>↓</b></a>
+      </div>
+      <div class="hero-photo-wrap">
+        <div class="photo-halo"></div>
+        <div class="hero-photo"></div>
+        <span class="photo-caption">UN GRAND OUI, POUR LA VIE</span>
+        <span class="flower flower-one">✿</span>
+        <span class="flower flower-two">❀</span>
+      </div>
+      <div class="hero-bottom">12 . 06 . 2027 <span>AVEC TOUT NOTRE AMOUR</span> PARIS, FRANCE</div>
+    </section>
+
+    <section class="intro section-pad">
+      <p class="script">Une belle histoire, un nouveau chapitre</p>
+      <h2>Et si nous célébrions<br><em>l'amour ensemble ?</em></h2>
+      <p class="intro-text">Après tant de jolis souvenirs, nous avons hâte de commencer cette nouvelle aventure entourés des personnes qui comptent le plus pour nous. Votre présence rendra cette journée encore plus belle.</p>
+      <div class="tiny-flower">✿</div>
+    </section>
+
+    <section id="histoire" class="story section-pad">
+      <div class="story-image image-circle"></div>
+      <div class="story-copy">
+        <p class="eyebrow">DEUX CŒURS, UNE HISTOIRE</p>
+        <p class="script">Tout a commencé par…</p>
+        <h2>Une rencontre,<br><em>mille émotions.</em></h2>
+        <p>Un regard, un sourire, des conversations qui n'en finissent pas… Puis l'évidence. Aujourd'hui, nous avons envie de vous raconter la suite, entourés de ceux que nous aimons.</p>
+        <span class="signature">Sarah & David</span>
+      </div>
+    </section>
+
+    <section class="countdown-section">
+      <p class="script">Le grand jour approche</p>
+      <h2>Plus que quelques <em>instants…</em></h2>
+      <div class="countdown">
+        <div v-for="(value, index) in countdown" :key="index"><strong>{{ String(value).padStart(2, '0') }}</strong><span>{{ ['JOURS','HEURES','MINUTES','SECONDES'][index] }}</span></div>
+      </div>
+      <p class="countdown-note">Nous avons tellement hâte de vous retrouver !</p>
+      <div class="count-flower">❀</div>
+    </section>
+
+    <section id="journee" class="day-section section-pad">
+      <div class="section-heading">
+        <p class="eyebrow">À VOS AGENDAS</p>
+        <p class="script">Le samedi 12 juin 2027</p>
+        <h2>Le programme de<br><em>notre journée</em></h2>
+      </div>
+      <div class="timeline">
+        <article class="event">
+          <div class="event-photo event-one"></div>
+          <div class="event-info"><span class="event-time">15H00</span><h3>La cérémonie</h3><p>Le début de notre plus belle aventure, à partager tous ensemble.</p><small>JARDIN DES ÉTOILES · PARIS</small></div>
+        </article>
+        <article class="event reverse">
+          <div class="event-photo event-two"></div>
+          <div class="event-info"><span class="event-time">17H00</span><h3>Le cocktail</h3><p>Quelques bulles, de belles retrouvailles et beaucoup de joie.</p><small>JARDIN DES ÉTOILES · PARIS</small></div>
+        </article>
+        <article class="event">
+          <div class="event-photo event-three"></div>
+          <div class="event-info"><span class="event-time">20H00</span><h3>Le dîner & la fête</h3><p>Une soirée pleine de surprises, de musique et de danse.</p><small>JARDIN DES ÉTOILES · PARIS</small></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="quote-section">
+      <div class="quote-photo"></div>
+      <div class="quote-copy"><span>“</span><p class="script">Le plus beau voyage est celui que l'on fait à deux.</p><small>ET LE NÔTRE NE FAIT QUE COMMENCER</small></div>
+    </section>
+
+    <section id="infos" class="info-section section-pad">
+      <p class="eyebrow">POUR PROFITER PLEINEMENT</p>
+      <p class="script">Quelques petits détails</p>
+      <h2>Tout ce qu'il faut <em>savoir</em></h2>
+      <div class="info-grid">
+        <article><div class="info-icon">⌖</div><h3>Le lieu</h3><p>Jardin des Étoiles<br>12 rue des Lilas, Paris</p><a href="https://maps.google.com/?q=Paris" target="_blank" rel="noreferrer">Voir l'itinéraire ↗</a></article>
+        <article><div class="info-icon">♡</div><h3>Tenue de fête</h3><p>Une tenue élégante et festive, dans laquelle vous vous sentez beaux et bien.</p><span>CHIC & ROMANTIQUE</span></article>
+        <article><div class="info-icon">✉</div><h3>Votre réponse</h3><p>Merci de nous confirmer votre présence avant le 15 mai 2027.</p><a href="#rsvp">Répondre ici ↓</a></article>
+      </div>
+    </section>
+
+    <section id="rsvp" class="rsvp-section">
+      <div class="rsvp-flower">✿</div>
+      <p class="eyebrow">ON COMPTE SUR VOUS !</p>
+      <p class="script">Un petit mot de votre part</p>
+      <h2>Serez-vous <em>avec nous ?</em></h2>
+      <p class="rsvp-intro">Dites-nous si vous serez présents pour célébrer cette journée à nos côtés.</p>
+      <form v-if="!submitted" @submit.prevent="submitRsvp">
+        <label>Votre nom et prénom<input v-model="guestName" required placeholder="Comment vous appelez-vous ?"></label>
+        <label>Votre adresse e-mail<input v-model="guestEmail" type="email" required placeholder="vous@exemple.fr"></label>
+        <fieldset><legend>Votre réponse</legend><label class="choice"><input v-model="attendance" type="radio" value="oui"> Avec joie, je serai là !</label><label class="choice"><input v-model="attendance" type="radio" value="non"> Je ne pourrai malheureusement pas venir</label></fieldset>
+        <label>Nombre de personnes<select v-model="guestCount"><option>1</option><option>2</option><option>3</option><option>4</option></select></label>
+        <label>Un petit mot pour nous<textarea v-model="message" rows="3" placeholder="Un mot doux, une pensée…"></textarea></label>
+        <button type="submit">Envoyer ma réponse <span>♡</span></button>
+      </form>
+      <div v-else class="thanks"><span>♡</span><h3>Merci {{ guestName }} !</h3><p>Votre réponse a bien été prise en compte dans cette démonstration.</p></div>
+      <small class="form-note">Démonstration : les réponses ne sont pas encore enregistrées ni envoyées.</small>
+    </section>
+
+    <footer><div class="footer-monogram">S <span>&</span> D</div><p class="script">Nous avons hâte de vous retrouver</p><p>12 JUIN 2027 · PARIS</p><small>AVEC AMOUR · INVITATION IMAGINÉE PAR C BY C</small></footer>
+  </main>
 </template>
